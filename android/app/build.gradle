@@ -49,10 +49,12 @@ react {
     //
     //   The list of flags to pass to the Hermes compiler. By default is "-O", "-output-source-map"
     // hermesFlags = ["-O", "-output-source-map"]
+    hermesEnabled=true
 
     /* Autolinking */
     autolinkLibrariesWithApp()
 }
+
 
 /**
  * Set this to true to Run Proguard on Release builds to minify the Java bytecode.
@@ -77,9 +79,12 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.synctripapp"
+    namespace "com.synctrip"
     defaultConfig {
-        applicationId "com.synctripapp"
+        manifestPlaceholders = [
+        appAuthRedirectScheme: "com.googleusercontent.apps.75407427961-q6dc3iunl36l5lgcl1gcslt1oti2mab2.apps.googleusercontent.com"
+        ]
+        applicationId "com.synctrip"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -117,3 +122,5 @@ dependencies {
         implementation jscFlavor
     }
 }
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
