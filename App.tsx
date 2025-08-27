@@ -14,6 +14,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
   const [showLocationScreen, setShowLocationScreen] = useState(false);
+  const [LocationPermissionGranted, setLocationPermissionGranted] = useState(false);
   const [showProfileBuilding, setShowProfileBuilding] = useState(false);
 const MyTheme = {
   ...DefaultTheme,
@@ -40,6 +41,12 @@ const MyTheme = {
     await AsyncStorage.setItem('locationPermission', 'true');
     setShowLocationScreen(false);
     console.log('Location:', location);
+    if(location != null) {
+      setLocationPermissionGranted(true);
+    }
+    else {
+      setLocationPermissionGranted(false);
+    }
   };
   const handleProfileCompleted = async () => {
     await AsyncStorage.setItem('profileCompleted', 'true');
@@ -57,7 +64,7 @@ const MyTheme = {
                 <View style={styles.appBackground}>
 
                   <NavigationContainer theme={MyTheme}>
-                    {user != null ? (showLocationScreen ? (
+                    {user != null ? (showLocationScreen && !LocationPermissionGranted ? (
                       <LocationPermissionScreen onPermissionGranted={handlePermissionGranted} />
                     ) : (
                       <AppNavigator showProfileBuilding={showProfileBuilding} />

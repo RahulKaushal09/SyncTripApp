@@ -10,7 +10,6 @@ interface ColorButton1Props {
 }
 
 const ColorButton1: React.FC<ColorButton1Props> = ({ onPress, text, IconPath, isSelected }) => {
-  const [isToggled, setIsToggled] = useState(false);
 
 
   return (
@@ -22,7 +21,7 @@ const ColorButton1: React.FC<ColorButton1Props> = ({ onPress, text, IconPath, is
 
     >
         {IconPath && (<Image source={{uri:IconPath}} style={{width:20, height:20, marginBottom:4}} />)}
-      <Text style={[styles.text, isToggled ? styles.textOn : styles.textOff]}>
+      <Text style={[styles.text, isSelected ? styles.textOn : styles.textOff]}>
         {text}
       </Text>
     </TouchableOpacity>
